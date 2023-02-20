@@ -1,0 +1,116 @@
+import tweepy
+import configparser
+import pandas as pd
+import time
+import datetime
+
+#read configs
+config = configparser.ConfigParser()
+config.read('config.ini')
+
+api_key = config['Twitter RMT Books']['api_key']
+api_key_secret = config['Twitter RMT Books']['api_key_secret']
+
+access_token = config['Twitter RMT Books']['access_token']
+access_token_secret = config['Twitter RMT Books']['access_token_secret']
+
+#Authenticate account
+auth = tweepy.OAuthHandler(api_key, api_key_secret)
+auth.set_access_token(access_token, access_token_secret)
+
+api = tweepy.API(auth)
+
+ts_h = datetime.datetime.now().hour
+ts_m = datetime.datetime.now().minute
+
+
+#api.update_status('This is a test: #NFTCollection \n #nftphotography')
+
+
+flag = 0
+
+while flag == 1:
+    ts_h = datetime.datetime.now().hour
+    ts_m = datetime.datetime.now().minute
+    if ts_h == 2 and ts_m == 42:
+        api.update_status('Twitter posting in your sleep?')
+        flag = 0
+        print('Check Twitter for RMT Books')
+    else:
+        print(flag)
+        print(ts_m)
+        print(ts_h)
+        time.sleep(30)
+
+
+
+
+
+
+public_tweets = api.home_timeline()
+
+columns = ['Time','User','Tweet']
+data = []
+
+#print(public_tweets[0].user.screen_name)
+
+#the following lines of code grab the 
+
+for tweet in public_tweets:
+    data.append([tweet.created_at, tweet.user.screen_name, tweet.text])
+    
+df = pd.DataFrame(data, columns=columns)
+
+
+
+
+flag = 1
+j = 1
+
+while flag == 1:
+    ts_h = datetime.datetime.now().hour
+    ts_m = datetime.datetime.now().minute
+    if ts_h == 11 and ts_m == 49:
+        api.update_status('Great content writing is about connecting with your audience, telling stories that matter, and offering unique insights that provide value. #contentwriting #marketingtips')
+        j = j + 1
+        time.sleep(60)
+    elif ts_h == 12 and ts_m == 2:
+        api.update_status('A clear, concise, and engaging writing style is the hallmark of a great content writer. #contentwriting #writingtips')
+        j = j + 1
+        time.sleep(60)
+    elif ts_h == 14 and ts_m == 18:
+        api.update_status('Successful content writing requires understanding your target audience\'s pain points, challenges, and motivations, and creating content that speaks directly to them. #contentstrategy #targetaudience')
+        j = j + 1
+        time.sleep(60)
+    elif ts_h == 15 and ts_m == 30:
+        api.update_status('To create compelling content that drives engagement, you need to be a great storyteller. Whether it\'s a blog post, social media post, or video, storytelling is the key to capturing your audience\'s attention. #storytelling #contentcreation')
+        j = j + 1
+        time.sleep(60)
+    elif ts_h == 17 and ts_m == 27:
+        api.update_status('Writing headlines that grab your reader\'s attention is critical to the success of your content. A strong headline can make the difference between your content being shared or ignored. #headlinewriting #copywriting')
+        j = j + 1
+        time.sleep(60)
+    elif ts_h == 18 and ts_m == 3:
+        api.update_status('Consistency is key when it comes to content writing. You need to create a regular publishing schedule that your audience can rely on. #contentmarketing #publishing')
+        j = j + 1
+        time.sleep(60)
+    elif ts_h == 19 and ts_m == 54:
+        api.update_status('Great content writers don\'t just create content; they understand how to use data to optimize their content for search engines, social media, and user engagement. #contentoptimization #analytics')
+        j = j + 1
+        time.sleep(60)
+    elif ts_h == 20 and ts_m == 20:
+        api.update_status('One of the biggest mistakes content writers make is failing to edit their work. Editing is an essential part of the writing process that ensures your content is error-free and easy to read. #editing #writingtips')
+        j = j + 1
+        time.sleep(60)
+    elif ts_h == 21 and ts_m == 31:
+        api.update_status('Creating valuable, informative, and entertaining content is the best way to establish yourself as an authority in your industry. It helps build your reputation and drive traffic to your website. #thoughtleadership #contentcreation')
+        j = j + 1
+        time.sleep(60)
+    elif ts_h == 22 and ts_m == 0:
+        api.update_status('Effective content writing requires staying up to date on the latest trends and techniques in the industry. It means constantly learning, testing, and adapting your content to stay ahead of the competition. #contentmarketing #continuousimprovement')
+        time.sleep(60)
+    else:
+        print(ts_h)
+        print(ts_m)
+        print(j)
+        time.sleep(30)
